@@ -42,6 +42,13 @@ This version rewrote the whole server management part of the plugin, adding supp
 * Maybe: Plugin button in Toolbar
 * Maybe: Some simple remote control functions
 
+## Building
+
+Make sure you have the Add-on SDK [installed](https://developer.mozilla.org/en-US/Add-ons/SDK/Tutorials/Installation) and that you have `cfx` activated.
+
+Run the plugin with `cfx run`
+Create an xpi that you can drag and drop to your browser with `cfx xpi`
+
 ## License
 
 MIT
