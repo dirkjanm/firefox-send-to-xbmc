@@ -1,0 +1,10 @@
+{
+  "name": "send-to-xbmc",
+  "title": "Send to XBMC",
+  "id": "jid0-YCM0p5WlCGjvBJcZhAusQ5h26wM@jetpack",
+  "description": "Sends YouTube, video and music links to XBMC for playback",
+  "author": "Sano_Webdevelopment",
+  "license": "MIT",
+  "version": "2.0",
+  "main": "main"
+}

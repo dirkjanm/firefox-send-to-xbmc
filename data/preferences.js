@@ -1,0 +1,111 @@
+function updateServersTable(data) {
+  var servers = data.servers;
+  var creds = data.credentials;
+  $('#serverlist').html('');
+  servers.forEach(function (server) {
+    var checkhost = server.host + ':' + server.port;
+    if (creds[checkhost]) {
+      server.username = creds[checkhost].username;
+      server.password = creds[checkhost].password;
+    } else {
+      server.username = '';
+      server.password = '';
+    }
+    var row = '<tr>' + '<td>' + server.label + '</td>' + '<td>' + server.host + '</td>' + '<td>' + server.port + '</td>' + '<td>' + server.username + '</td>' + '<td data-password="' + server.password + '">[hidden]</td>' + '<td><a href="#addserver" class="btn btn-default editbtn btn-sm">Edit</a> <button class="btn btn-danger btn-sm deleterow" type="button">Delete</button></td>' + '</tr>';
+    $('#serverlist').append(row);
+  });
+}
+
+function updatePage() {
+  var servers = [];
+  $('#serverlist tr').each(function () {
+    var server = {};
+    var ritems = $('td', this);
+    server.label = $(ritems[0]).text();
+    server.host = $(ritems[1]).text();
+    server.port = $(ritems[2]).text();
+    server.username = $(ritems[3]).text();
+    server.password = $(ritems[4]).data('password');
+    servers.push(server);
+  });
+  self.port.emit('updateservers', servers);
+  if ($('#serverlist tr').size() === 0) {
+    $('#noservers').removeClass('hidden');
+  } else {
+    $('#noservers').addClass('hidden');
+  }
+}
+
+function validateForm() {
+  if ($('#server-label').val() === '') {
+    $('#server-label').parent().addClass('has-error');
+    return false;
+  }
+  if ($('#server-ip').val() === '' || !/^([0-2]?\d{0,2}\.){3}([0-2]?\d{0,2})$/.test($('#server-ip').val())) {
+    $('#server-ip').parent().addClass('has-error');
+    return false;
+  }
+  if ($('#server-port').val() === '') {
+    $('#server-port').val('80');
+  }
+  return true;
+}
+self.port.on("init", function (data) {
+  updateServersTable(data);
+  $('#serverlist').on('click', '.deleterow', function (e) {
+    e.preventDefault();
+    $(this).parent().parent().remove();
+    updatePage();
+  });
+  $('#serverlist').on('click', '.editbtn', function (e) {
+    e.preventDefault();
+    window.editingEl = $(this).parent().parent();
+    window.editingEl.find('td').each(function (i) {
+      var el = $(this);
+      if (i === 0) {
+        $('#server-label').val(el.text());
+      }
+      if (i === 1) {
+        $('#server-ip').val(el.text());
+      }
+      if (i === 2) {
+        $('#server-port').val(el.text());
+      }
+      if (i === 3) {
+        $('#server-username').val(el.text());
+      }
+      if (i === 4) {
+        $('#server-password').val(el.data('password'));
+      }
+    });
+    $('#formmode').removeClass('addmode').addClass('editmode');
+  });
+  $('#server-edit').on('click', function (e) {
+    e.preventDefault();
+    if (!validateForm()) {
+      return false;
+    } else {
+      $('.form-group.has-error').removeClass('has-error');
+    }
+    var row = '<tr><td>' + $('#server-label').val() + '</td><td>' + $('#server-ip').val() + '</td><td>' + $('#server-port').val() + '</td><td>' + $('#server-username').val() + '</td><td data-password="' + $('#server-password').val() + '">[hidden]</td><td><a href="#addserver" class="btn btn-default editbtn btn-sm">Edit</a> <button class="btn btn-danger btn-sm deleterow" type="button">Delete</button></td></tr>';
+    window.editingEl.replaceWith(row);
+    $('#addserver')[0].reset();
+    $('#formmode').removeClass('editmode').addClass('addmode');
+    updatePage();
+    return false;
+  });
+  $('#server-add').on('click', function (e) {
+    e.preventDefault();
+    if (!validateForm()) {
+      return false;
+    } else {
+      $('.form-group.has-error').removeClass('has-error');
+    }
+    var row = '<tr><td>' + $('#server-label').val() + '</td><td>' + $('#server-ip').val() + '</td><td>' + $('#server-port').val() + '</td><td>' + $('#server-username').val() + '</td><td data-password="' + $('#server-password').val() + '">[hidden]</td><td><a href="#addserver" class="btn btn-default editbtn btn-sm">Edit</a> <button class="btn btn-danger btn-sm deleterow" type="button">Delete</button></td></tr>';
+    $('#serverlist').append(row);
+    $('#addserver')[0].reset();
+    updatePage();
+    return false;
+  });
+  window.pagestate = 'saved';
+});

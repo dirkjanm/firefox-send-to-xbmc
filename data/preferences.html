@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Send to XBMC preferences</title>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+<link href="bootstrap.theme.min.css" rel="stylesheet">
+  </head>
+  <body role="document">
+  <div class="container theme-showcase" role="main">
+  <div class="page-header">
+    <h1>Send to XBMC preferences</h1>
+    </div>
+<h2>Servers</h2>
+<p id="noservers" class="alert alert-info hidden">No servers defined, you can add your first one below</p>
+<table class="table table-striped">
+<thead>
+<tr><th>Name</th><th>XBMC IP</th><th>XBMC port</th><th>Username</th><th>Password</th><th>Edit/Remove</th></tr>
+</thead>
+<tbody id="serverlist">
+</tbody>
+</table>
+<button class="btn" id="showpass">Show passwords</button>
+<div id="formmode" class="addmode">
+<h2 class="adding">Add server</h2>
+<h2 class="editing">Edit server</h2>
+<form id="addserver" class="form-inline" role="form">
+ <div class="form-group">
+ <input type="text" name="server-label" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-label" placeholder="Server name" title="The name you want this XBMC server to have" />
+ </div>
+  <div class="form-group">
+ <input type="text" name="server-ip" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-ip" placeholder="Server IP" title="The IP address of the device XBMC runs on" />
+ </div>
+  <div class="form-group">
+ <input type="text" name="server-port" data-toggle="tooltip" data-placement="top" class="form-control" id="server-port" placeholder="Port" title="The port XBMC is listening on (default: 80)" />
+ </div>
+   <div class="form-group">
+ <input type="text" name="server-username" data-toggle="tooltip" data-placement="top" class="form-control" id="server-username" placeholder="Username" title="The username configured for the XBMC Web Interface" />
+ </div>
+  <div class="form-group">
+ <input type="password" name="server-password" data-toggle="tooltip" data-placement="top" class="form-control" id="server-password" placeholder="Password" title="The password configured for the XBMC Web Interface" />
+ </div>
+ <div class="form-group">
+ <button type="button" class="btn btn-success adding" data-toggle="tooltip" data-placement="top" id="server-add">Add</button>
+ <button type="button" class="btn btn-success editing" data-toggle="tooltip" data-placement="top" id="server-edit">Edit</button>
+ </div>
+</form>
+</div>
+  </div>
+  <script src="jquery-2.1.1.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <script>$(function(){
+    $('#addserver input').tooltip();
+    $('#showpass').on('click',function(){
+      $('#serverlist tr').each(function(){
+        var td = $($('td',this)[4]);
+        td.text(td.data('password'));
+      });
+      return false;
+    });
+  });
+
+  </script>
+  <style>
+  .addmode .editing {
+    display:none;
+  }
+  .editmode .adding {
+    display:none;
+  }
+  </style>
+  </body>
+</html>
