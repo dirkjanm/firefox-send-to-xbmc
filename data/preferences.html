@@ -7,6 +7,7 @@
     <!-- Bootstrap -->
     <link href="bootstrap.min.css" rel="stylesheet">
 <link href="bootstrap.theme.min.css" rel="stylesheet">
+<link href="preferences.css" rel="stylesheet">
   </head>
   <body role="document">
   <div class="container theme-showcase" role="main">
@@ -28,31 +29,30 @@
 <h2 class="editing">Edit server</h2>
 <form id="addserver" class="form-inline" role="form">
  <div class="form-group">
- <input type="text" name="server-label" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-label" placeholder="Server name" title="The name you want this XBMC server to have" />
+ <input type="text" name="server-label" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-label" placeholder="Server name" data-title="The name you want this XBMC server to have" />
  </div>
   <div class="form-group">
- <input type="text" name="server-ip" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-ip" placeholder="Server IP" title="The IP address of the device XBMC runs on" />
+ <input type="text" name="server-ip" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-ip" placeholder="Server IP" data-title="The IP address of the device XBMC runs on" />
  </div>
   <div class="form-group">
- <input type="text" name="server-port" data-toggle="tooltip" data-placement="top" class="form-control" id="server-port" placeholder="Port" title="The port XBMC is listening on (default: 80)" />
+ <input type="text" name="server-port" data-toggle="tooltip" data-placement="top" class="form-control" id="server-port" placeholder="Port" data-title="The port XBMC is listening on (default: 80)" />
  </div>
    <div class="form-group">
- <input type="text" name="server-username" data-toggle="tooltip" data-placement="top" class="form-control" id="server-username" placeholder="Username" title="The username configured for the XBMC Web Interface" />
+ <input type="text" name="server-username" data-toggle="tooltip" data-placement="top" class="form-control" id="server-username" placeholder="Username" data-title="The username configured for the XBMC Web Interface" />
  </div>
   <div class="form-group">
- <input type="password" name="server-password" data-toggle="tooltip" data-placement="top" class="form-control" id="server-password" placeholder="Password" title="The password configured for the XBMC Web Interface" />
+ <input type="password" name="server-password" data-toggle="tooltip" data-placement="top" class="form-control" id="server-password" placeholder="Password" data-title="The password configured for the XBMC Web Interface" />
  </div>
  <div class="form-group">
- <button type="button" class="btn btn-success adding" data-toggle="tooltip" data-placement="top" id="server-add">Add</button>
- <button type="button" class="btn btn-success editing" data-toggle="tooltip" data-placement="top" id="server-edit">Edit</button>
+ <button type="button" class="btn btn-success adding" id="server-add">Add</button>
+ <button type="button" class="btn btn-success editing" id="server-edit">Edit</button>
  </div>
 </form>
 </div>
   </div>
   <script src="jquery-2.1.1.min.js"></script>
-  <script src="bootstrap.min.js"></script>
+  <script src="tooltips.js"></script>
   <script>$(function(){
-    $('#addserver input').tooltip();
     $('#showpass').on('click',function(){
       $('#serverlist tr').each(function(){
         var td = $($('td',this)[4]);
@@ -63,13 +63,5 @@
   });
 
   </script>
-  <style>
-  .addmode .editing {
-    display:none;
-  }
-  .editmode .adding {
-    display:none;
-  }
-  </style>
   </body>
 </html>
