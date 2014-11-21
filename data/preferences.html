@@ -53,11 +53,23 @@
   <script src="jquery-2.1.1.min.js"></script>
   <script src="tooltips.js"></script>
   <script>$(function(){
+    var passvisible = false;
     $('#showpass').on('click',function(){
-      $('#serverlist tr').each(function(){
-        var td = $($('td',this)[4]);
-        td.text(td.data('password'));
-      });
+      if(!passvisible){
+        $('#serverlist tr').each(function(){
+          var td = $($('td',this)[4]);
+          td.text(td.data('password'));
+        });
+        $(this).text('Hide passwords');
+        passvisible = true;
+      }else{
+        $('#serverlist tr').each(function(){
+          $($('td',this)[4]).text('[hidden]');
+        });
+        $(this).text('Show passwords');
+        passvisible = false;
+      }
+
       return false;
     });
   });

@@ -1,7 +1,7 @@
 function updateServersTable(data) {
   var servers = data.servers;
   var creds = data.credentials;
-  $('#serverlist').html('');
+  $('#serverlist').empty();
   servers.forEach(function (server) {
     var checkhost = server.host + ':' + server.port;
     if (creds[checkhost]) {
@@ -11,7 +11,15 @@ function updateServersTable(data) {
       server.username = '';
       server.password = '';
     }
-    var row = '<tr>' + '<td>' + server.label + '</td>' + '<td>' + server.host + '</td>' + '<td>' + server.port + '</td>' + '<td>' + server.username + '</td>' + '<td data-password="' + server.password + '">[hidden]</td>' + '<td><a href="#addserver" class="btn btn-default editbtn btn-sm">Edit</a> <button class="btn btn-danger btn-sm deleterow" type="button">Delete</button></td>' + '</tr>';
+    var row = $('<tr>')
+      .append($('<td>').text(server.label))
+      .append($('<td>').text(server.host))
+      .append($('<td>').text(server.port))
+      .append($('<td>').text(server.username))
+      .append($('<td>', { "data-password": server.password }).text('[hidden]'));
+    var link = $('<a>',{"href": '#addserver', "class": 'btn btn-default editbtn btn-sm'}).text('Edit');
+    var deletebtn = $('<button>',{"class": 'btn btn-danger btn-sm deleterow', "type":'button'}).text('Delete');
+    row.append($('<td>').append(link,' ',deletebtn));
     $('#serverlist').append(row);
   });
 }
@@ -87,7 +95,18 @@ self.port.on("init", function (data) {
     } else {
       $('.form-group.has-error').removeClass('has-error');
     }
-    var row = '<tr><td>' + $('#server-label').val() + '</td><td>' + $('#server-ip').val() + '</td><td>' + $('#server-port').val() + '</td><td>' + $('#server-username').val() + '</td><td data-password="' + $('#server-password').val() + '">[hidden]</td><td><a href="#addserver" class="btn btn-default editbtn btn-sm">Edit</a> <button class="btn btn-danger btn-sm deleterow" type="button">Delete</button></td></tr>';
+    //Construct new row
+    var row = $('<tr>')
+      .append($('<td>').text($('#server-label').val()))
+      .append($('<td>').text($('#server-ip').val()))
+      .append($('<td>').text($('#server-port').val()))
+      .append($('<td>').text($('#server-username').val()))
+      .append($('<td>', { "data-password": $('#server-password').val() }).text('[hidden]'));
+    var link = $('<a>',{"href": '#addserver', "class": 'btn btn-default editbtn btn-sm'}).text('Edit');
+    var deletebtn = $('<button>',{"class": 'btn btn-danger btn-sm deleterow', "type":'button'}).text('Delete');
+    row.append($('<td>').append(link,' ',deletebtn));
+
+    //Replace the row being edited with the new row
     window.editingEl.replaceWith(row);
     $('#addserver')[0].reset();
     $('#formmode').removeClass('editmode').addClass('addmode');
@@ -101,7 +120,18 @@ self.port.on("init", function (data) {
     } else {
       $('.form-group.has-error').removeClass('has-error');
     }
-    var row = '<tr><td>' + $('#server-label').val() + '</td><td>' + $('#server-ip').val() + '</td><td>' + $('#server-port').val() + '</td><td>' + $('#server-username').val() + '</td><td data-password="' + $('#server-password').val() + '">[hidden]</td><td><a href="#addserver" class="btn btn-default editbtn btn-sm">Edit</a> <button class="btn btn-danger btn-sm deleterow" type="button">Delete</button></td></tr>';
+    //Construct row
+    var row = $('<tr>')
+      .append($('<td>').text($('#server-label').val()))
+      .append($('<td>').text($('#server-ip').val()))
+      .append($('<td>').text($('#server-port').val()))
+      .append($('<td>').text($('#server-username').val()))
+      .append($('<td>', { "data-password": $('#server-password').val() }).text('[hidden]'));
+    var link = $('<a>',{"href": '#addserver', "class": 'btn btn-default editbtn btn-sm'}).text('Edit');
+    var deletebtn = $('<button>',{"class": 'btn btn-danger btn-sm deleterow', "type":'button'}).text('Delete');
+    row.append($('<td>').append(link,' ',deletebtn));
+
+    //Add this row to the list of servers
     $('#serverlist').append(row);
     $('#addserver')[0].reset();
     updatePage();

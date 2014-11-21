@@ -49,6 +49,8 @@ Make sure you have the Add-on SDK [installed](https://developer.mozilla.org/en-U
 Run the plugin with `cfx run`
 Create an xpi that you can drag and drop to your browser with `cfx xpi`
 
+To add the "Options" button in the Add-ons Manager, replace the `install.rdf` file in the xpi file with the `install.rdf` file from the repository using an archive manager such as 7-zip.
+
 ## License
 
 MIT
