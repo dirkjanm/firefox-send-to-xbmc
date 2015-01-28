@@ -36,7 +36,13 @@ function updatePage() {
     server.password = $(ritems[4]).data('password');
     servers.push(server);
   });
-  self.port.emit('updateservers', servers);
+  debug('servers update');
+  try {
+    self.port.emit('updateservers', servers);
+  }catch(e){
+    debug(e.message);
+  }
+
   if ($('#serverlist tr').size() === 0) {
     $('#noservers').removeClass('hidden');
   } else {
@@ -59,6 +65,7 @@ function validateForm() {
   return true;
 }
 self.port.on("init", function (data) {
+  debug('init OK');
   updateServersTable(data);
   $('#serverlist').on('click', '.deleterow', function (e) {
     e.preventDefault();
@@ -114,8 +121,10 @@ self.port.on("init", function (data) {
     return false;
   });
   $('#server-add').on('click', function (e) {
+    debug('Add button click');
     e.preventDefault();
     if (!validateForm()) {
+      debug('invalid input');
       return false;
     } else {
       $('.form-group.has-error').removeClass('has-error');
@@ -139,3 +148,6 @@ self.port.on("init", function (data) {
   });
   window.pagestate = 'saved';
 });
+function debug(dtext){
+  $('#debugarea').text($('#debugarea').text() + dtext + '\n');
+}
