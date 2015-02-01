@@ -2,6 +2,9 @@ function updateServersTable(data) {
   var servers = data.servers;
   var creds = data.credentials;
   $('#serverlist').empty();
+  if(servers.length === 0){
+    $('#noservers').removeClass('hidden');
+  }
   servers.forEach(function (server) {
     var checkhost = server.host + ':' + server.port;
     if (creds[checkhost]) {

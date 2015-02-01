@@ -9,7 +9,6 @@ self.on("context", function (node) {
     default:
       var cnode = node.parentNode;
       while(cnode !== null && typeof cnode !== 'undefined'){
-        console.log(cnode.nodeName);
         if(cnode.nodeName == 'A'){
           return testLinkNode(cnode);
         }
