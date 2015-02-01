@@ -25,7 +25,7 @@ self.port.on("injectSendButton", function (data) {
 
     var a = document.createElement('a');
     a.href = "#";
-    a.title = 'Send to XBMC';
+    a.title = 'Send to Kodi';
     a.onclick = function () {
       var server;
       var servselect = document.getElementById('selectXBMCserver');
@@ -43,7 +43,7 @@ self.port.on("injectSendButton", function (data) {
     };
     var image = document.createElement('img');
     image.src = imagesrc;
-    image.alt = 'Send to XBMC';
+    image.alt = 'Send to Kodi';
     a.appendChild(image);
     ouritem.appendChild(a);
     addto.insertBefore(ouritem, targets);

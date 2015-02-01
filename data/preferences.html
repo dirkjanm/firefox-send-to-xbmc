@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Send to XBMC preferences</title>
+    <title>Send to Kodi preferences</title>
 
     <!-- Bootstrap -->
     <link href="bootstrap.min.css" rel="stylesheet">
@@ -12,13 +12,13 @@
   <body role="document">
   <div class="container theme-showcase" role="main">
   <div class="page-header">
-    <h1>Send to XBMC preferences</h1>
+    <h1>Send to Kodi preferences</h1>
     </div>
 <h2>Servers</h2>
 <p id="noservers" class="alert alert-info hidden">No servers defined, you can add your first one below</p>
 <table class="table table-striped">
 <thead>
-<tr><th>Name</th><th>XBMC IP</th><th>XBMC port</th><th>Username</th><th>Password</th><th>Edit/Remove</th></tr>
+<tr><th>Name</th><th>Kodi IP</th><th>Kodi port</th><th>Username</th><th>Password</th><th>Edit/Remove</th></tr>
 </thead>
 <tbody id="serverlist">
 </tbody>
@@ -29,19 +29,19 @@
 <h2 class="editing">Edit server</h2>
 <form id="addserver" class="form-inline" role="form">
  <div class="form-group">
- <input type="text" name="server-label" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-label" placeholder="Server name" data-title="The name you want this XBMC server to have" />
+ <input type="text" name="server-label" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-label" placeholder="Server name" data-title="The name you want this Kodi server to have" />
  </div>
   <div class="form-group">
- <input type="text" name="server-ip" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-ip" placeholder="Server IP/host" data-title="The IP address or hostname of the device XBMC runs on" />
+ <input type="text" name="server-ip" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-ip" placeholder="Server IP/host" data-title="The IP address or hostname of the device Kodi runs on" />
  </div>
   <div class="form-group">
- <input type="text" name="server-port" data-toggle="tooltip" data-placement="top" class="form-control" id="server-port" placeholder="Port" data-title="The port XBMC is listening on (default: 80)" />
+ <input type="text" name="server-port" data-toggle="tooltip" data-placement="top" class="form-control" id="server-port" placeholder="Port" data-title="The port Kodi is listening on (default: 80)" />
  </div>
    <div class="form-group">
- <input type="text" name="server-username" data-toggle="tooltip" data-placement="top" class="form-control" id="server-username" placeholder="Username" data-title="The username configured for the XBMC Web Interface" />
+ <input type="text" name="server-username" data-toggle="tooltip" data-placement="top" class="form-control" id="server-username" placeholder="Username" data-title="The username configured for the Kodi Web Interface" />
  </div>
   <div class="form-group">
- <input type="password" name="server-password" data-toggle="tooltip" data-placement="top" class="form-control" id="server-password" placeholder="Password" data-title="The password configured for the XBMC Web Interface" />
+ <input type="password" name="server-password" data-toggle="tooltip" data-placement="top" class="form-control" id="server-password" placeholder="Password" data-title="The password configured for the Kodi Web Interface" />
  </div>
  <div class="form-group">
  <button type="button" class="btn btn-success adding" id="server-add">Add</button>
