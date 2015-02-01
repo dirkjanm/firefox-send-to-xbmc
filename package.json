@@ -6,5 +6,6 @@
   "author": "Sano_Webdevelopment",
   "license": "MIT",
   "version": "2.1.0",
-  "main": "main"
+  "main": "main",
+  "permissions": {"private-browsing": true}
 }
