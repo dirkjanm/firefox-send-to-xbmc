@@ -49,7 +49,9 @@ function validateForm() {
     $('#server-label').parent().addClass('has-error');
     return false;
   }
-  if ($('#server-ip').val() === '' || !/^([0-2]?\d{0,2}\.){3}([0-2]?\d{0,2})$/.test($('#server-ip').val())) {
+  var ipregex = /^([0-2]?\d{0,2}\.){3}([0-2]?\d{0,2})$/;
+  var hostregex = /^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9]))*$/;
+  if ($('#server-ip').val() === '' || (!ipregex.test($('#server-ip').val()) && !hostregex.test($('#server-ip').val()))) {
     $('#server-ip').parent().addClass('has-error');
     return false;
   }
