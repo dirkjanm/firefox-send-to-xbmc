@@ -5,7 +5,7 @@
   "description": "Sends YouTube, video and music links to XBMC for playback",
   "author": "Sano_Webdevelopment",
   "license": "MIT",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "main": "main",
   "permissions": {"private-browsing": true}
 }
