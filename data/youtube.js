@@ -62,10 +62,52 @@ function get_mix() {
     return urls;
 }
 
+function get_playlist() {
+    var urls = [];
+
+    var targets = document.getElementsByClassName('pl-video');
+    for (i = 0; i < targets.length; i++) {
+        urls.push(targets[i].getAttributeNode('data-video-id').value);
+    }
+
+    return urls;
+}
+
+function attachPlaylistSupport(data) {
+    var classes = ["yt-uix-button",  "playlist-play-all", "yt-uix-button-playlist-action", "spf-link", "play-all-icon-btn", "yt-uix-sessionlink", "yt-uix-button-default", "yt-uix-button-size-default", "yt-uix-button-has-icon", "no-icon-markup"];
+    var add_to = document.querySelector('.playlist-actions');
+    var target = document.querySelector(".playlist-play-all");
+    var servers = data.servers;
+
+    var a = document.createElement('a');
+    a.href = '#';
+    a.id = "sendToKodi"
+    for (i in classes)
+        a.classList.add(classes[i]);
+
+    a.onclick = function () {
+        self.port.emit('add_playlist', {
+            "urls": get_playlist(),
+            "server": select_server(servers)
+        });
+
+        return false;
+    };
+
+    var span = document.createElement('span');
+    span.appendChild(document.createTextNode("Play on Kodi"));
+
+    a.appendChild(span);
+
+    add_to.insertBefore(a, target);
+}
+
 function attachSendButton(data){
-    var addto = document.getElementById('watch-related');
+    var addto = document.querySelector('#watch-related');
     var targets = document.querySelector('#watch-related li');
     var servers = data.servers;
+
+    console.log(targets);
 
     var ouritem = document.createElement('li');
     ouritem.id = 'sendToKodi';
@@ -157,6 +199,9 @@ function waitForRelatedList(data){
         if(document.querySelector('#watch-related li') !== null && document.getElementById('sendToKodi') === null){
             attachSendButton(data);
         }
+
+        if (document.querySelector('.playlist-actions') != null && document.getElementById('sendToKodi') === null)
+            attachPlaylistSupport(data);
     });
     var config = { attributes: false, childList: true, characterData: false };
     ytobserver.observe(target,config);
