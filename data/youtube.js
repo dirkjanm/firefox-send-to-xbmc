@@ -107,8 +107,6 @@ function attachSendButton(data){
   var targets = document.querySelector('#watch-related li');
   var servers = data.servers;
 
-  console.log(targets);
-
   var ouritem = document.createElement('li');
   ouritem.id = 'sendToKodi';
   ouritem.appendChild(document.createTextNode('Send to Kodi'));

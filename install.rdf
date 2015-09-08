@@ -7,7 +7,7 @@
     <em:type>2</em:type>
     <em:bootstrap>true</em:bootstrap>
     <em:unpack>false</em:unpack>
-    <em:optionsURL>resource://jid0-ycm0p5wlcgjvbjczhausq5h26wm-at-jetpack/send-to-xbmc/data/preferences.html</em:optionsURL>
+    <em:optionsURL>resource://jid0-ycm0p5wlcgjvbjczhausq5h26wm-at-jetpack/data/preferences.html</em:optionsURL>
     <em:optionsType>3</em:optionsType>
 
     <!-- Firefox -->
