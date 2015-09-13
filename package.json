@@ -6,6 +6,6 @@
   "author": "Sano_Webdevelopment",
   "license": "MIT",
   "version": "2.3.0",
-  "main": "main",
+  "main": "lib/main.js",
   "permissions": {"private-browsing": true}
 }
