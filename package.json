@@ -1,11 +1,11 @@
 {
   "name": "send-to-xbmc",
-  "title": "Send to XBMC/Kodi",
+  "title": "Send to Kodi",
   "id": "jid0-YCM0p5WlCGjvBJcZhAusQ5h26wM@jetpack",
-  "description": "Sends YouTube, video and music links to XBMC for playback",
+  "description": "Sends YouTube, video and music links to Kodi for playback",
   "author": "Sano_Webdevelopment",
   "license": "MIT",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "main": "lib/main.js",
   "permissions": {"private-browsing": true}
 }
