@@ -7,6 +7,13 @@ Works with XBMC Eden and later, as well as with Kodi Helix.
 
 Version 2.0 of the plugin was made open source and placed on GitHub.
 This version rewrote the whole server management part of the plugin, adding support for multiple servers and adding the basics for a lot of extra features
+## Setup XBMC/Kodi
+Under System -> Services: 
+ * Web Server -> Make sure it's enabled and a password is set 
+ * Remote control -> Enable: "Allow remote control by programs on other systems" 
+Go back to Home to save changes
+
+Plug your Kodi info into the FireFox addon... IP can be obtained from System -> System info (Appears when System is highlighted )
 
 ## Features
 
