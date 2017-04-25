@@ -23,8 +23,8 @@ self.on("context", function (node) {
   }
 });
 function testLinkNode(node){
-  return /youtu|\/watch|\.(mp4|mkv|mov|mp3|avi|flv|wmv|asf|flac|mka|m4a|aac|ogg|pls|jpg|png|gif|jpeg|tiff)/.test(node.href);
+  return /youtu|\/watch|\.(mp4|mkv|mov|mp3|avi|flv|wmv|asf|flac|mka|m4a|aac|ogg|pls|jpg|png|gif|jpeg|tiff|webm|oga|ogv)/.test(node.href);
 }
 function testVideoNode(node){
-  return /youtu|\/watch|\.(mp4|mkv|mov|mp3|avi|flv|wmv|asf|flac|mka|m4a|aac|ogg|pls|jpg|png|gif|jpeg|tiff)/.test(node.currentSrc);
+  return /youtu|\/watch|\.(mp4|mkv|mov|mp3|avi|flv|wmv|asf|flac|mka|m4a|aac|ogg|pls|jpg|png|gif|jpeg|tiff|webm|oga|ogv)/.test(node.currentSrc);
 }
