@@ -59,7 +59,7 @@ function validateForm() {
     return false;
   }
   if ($('#server-port').val() === '') {
-    $('#server-port').val('80');
+    $('#server-port').val('8080');
   }
   return true;
 }

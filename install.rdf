@@ -3,11 +3,11 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. --><RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
     <em:id>jid0-YCM0p5WlCGjvBJcZhAusQ5h26wM@jetpack</em:id>
-    <em:version>2.3.2</em:version>
+    <em:version>2.3.3</em:version>
     <em:type>2</em:type>
     <em:bootstrap>true</em:bootstrap>
     <em:unpack>false</em:unpack>
-    <em:optionsURL>resource://jid0-ycm0p5wlcgjvbjczhausq5h26wm-at-jetpack/send-to-xbmc/data/preferences.html</em:optionsURL>
+    <em:optionsURL>resource://jid0-ycm0p5wlcgjvbjczhausq5h26wm-at-jetpack/data/preferences.html</em:optionsURL>
     <em:optionsType>3</em:optionsType>
     <em:multiprocessCompatible>true</em:multiprocessCompatible>
 
