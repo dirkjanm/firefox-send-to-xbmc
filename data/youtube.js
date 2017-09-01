@@ -1,6 +1,6 @@
 var ytobserver;
 self.port.on("injectSendButton", function (data) {
-  var addto = document.getElementById('watch-related');
+  var addto = document.querySelector('ytd-watch-next-secondary-results-renderer div#items');;
   if (addto) {
     //There is a related list on the page, which means we are on a video page
     attachSendButton(data);
@@ -12,7 +12,7 @@ self.port.on("injectSendButton", function (data) {
 });
 //Refresh the servers when the config is updated
 self.port.on("refreshButton", function (data) {
-  var addto = document.getElementById('watch-related');
+  var addto = document.querySelector('ytd-watch-next-secondary-results-renderer div#items');;
   if(typeof ytobserver !== 'undefined'){
     ytobserver.disconnect();
   }
@@ -31,14 +31,15 @@ self.port.on("refreshButton", function (data) {
   }
 });
 function attachSendButton(data){
-  var addto = document.getElementById('watch-related');
-  var targets = document.querySelector('#watch-related li');
+  var addto = document.querySelector('ytd-watch-next-secondary-results-renderer div#items');
+  var targets = addto.firstChild
   var imagesrc = data.image;
   var servers = data.servers;
-  var ouritem = document.createElement('li');
-  ouritem.className = 'video-list-item';
+  var ouritem = document.createElement('div');
+  ouritem.style['font-size'] = '1.6rem';
+  ouritem.style['font-weight'] = 400;
   ouritem.id = 'sendToKodi';
-  ouritem.appendChild(document.createTextNode('Send to'));
+  ouritem.appendChild(document.createTextNode('Send to '));
 
   //Add a dropdown to select which server we want to send to in case there is more than one
   if (servers.length > 1) {
@@ -96,7 +97,7 @@ function waitForRelatedList(data){
   var target = document.getElementsByTagName('body')[0];
   ytobserver = new MutationObserver(function(mutations) {
     //Only add the button if there is a related list and if there is no button yet
-    if(document.querySelector('#watch-related li') !== null && document.getElementById('sendToKodi') === null){
+    if(document.querySelector('ytd-watch-next-secondary-results-renderer div#items') !== null && document.getElementById('sendToKodi') === null){
       attachSendButton(data);
     }
   });
