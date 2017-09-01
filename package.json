@@ -5,7 +5,7 @@
   "description": "Sends YouTube, video and music links to Kodi for playback",
   "author": "Sano_Webdevelopment",
   "license": "MIT",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "main": "lib/main.js",
   "permissions": {"private-browsing": true}
 }
