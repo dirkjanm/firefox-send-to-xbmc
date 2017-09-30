@@ -40,7 +40,7 @@ function updatePage() {
     servers.push(server);
   });
   self.port.emit('updateservers', servers);
-  if ($('#serverlist tr').size() === 0) {
+  if ($('#serverlist tr').length === 0) {
     $('#noservers').removeClass('hidden');
   } else {
     $('#noservers').addClass('hidden');

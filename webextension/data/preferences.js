@@ -30,7 +30,7 @@ function updatePage() {
     servers.push(server);
   });
   browser.storage.local.set({'servers':servers});
-  if ($('#serverlist tr').size() === 0) {
+  if ($('#serverlist tr').length === 0) {
     $('#noservers').removeClass('hidden');
   } else {
     $('#noservers').addClass('hidden');

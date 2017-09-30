@@ -4,9 +4,10 @@ $(document).on('focus','[data-toggle="tooltip"]',function(){
   var height = $(this).height();
   var center = width / 2;
 
-  $(this).after('<span class="tooltip">'+ text +'<span></span></span>');
+  $(this).after('<span class="tooltip"><span></span></span>');
 
   var tooltip = $('span.tooltip');
+  tooltip.text(text)
   var tooltipWidth = tooltip.width();
   var tooltipCenter = tooltipWidth / 2 - center;
 
