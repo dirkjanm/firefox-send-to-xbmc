@@ -1,0 +1,39 @@
+.addmode .editing {
+  display:none;
+}
+.editmode .adding {
+  display:none;
+}
+.form-group {
+  position: relative;
+}
+span.tooltip {
+  position: absolute;
+  background: #000;
+  border-radius: 3px;
+  bottom: 30px;
+  left: 0;
+  display: inline-block;
+  width: auto;
+  color: #fff;
+  padding: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity .2s ease-in-out, bottom .3s ease-in-out;
+  z-index: 10;
+  font-size: 13px;
+  font-weight: normal;
+}
+span.tooltip span {
+  display: block;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 8px 8px 0px 8px;
+  border-color: #000 transparent transparent transparent;
+  position: absolute;
+  bottom: -8px;
+}
+*[data-toggle="tooltip"] {
+  position: relative;
+}

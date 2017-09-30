@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Send to Kodi preferences</title>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+<link href="bootstrap.theme.min.css" rel="stylesheet">
+<link href="preferences.css" rel="stylesheet">
+  </head>
+  <body role="document">
+  <div class="container theme-showcase" role="main">
+  <div class="page-header">
+    <h1>Send to XBMC/Kodi preferences</h1>
+    </div>
+<h2>Servers</h2>
+<p id="noservers" class="alert alert-info hidden">No servers defined, you can add your first one below</p>
+<table class="table table-striped">
+<thead>
+<tr><th>Name</th><th>Kodi IP</th><th>Kodi port</th><th>Username</th><th>Password</th><th>Edit/Remove</th></tr>
+</thead>
+<tbody id="serverlist">
+</tbody>
+</table>
+<button class="btn" id="showpass">Show passwords</button>
+<div id="formmode" class="addmode">
+<h2 class="adding">Add server</h2>
+<h2 class="editing">Edit server</h2>
+<form id="addserver" class="form-inline" role="form">
+ <div class="form-group">
+ <input type="text" name="server-label" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-label" placeholder="Server name" data-title="The name you want this Kodi server to have" />
+ </div>
+  <div class="form-group">
+ <input type="text" name="server-ip" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-ip" placeholder="Server IP/host" data-title="The IP address or hostname of the device Kodi runs on" />
+ </div>
+  <div class="form-group">
+ <input type="text" name="server-port" data-toggle="tooltip" data-placement="top" class="form-control" id="server-port" placeholder="Port" data-title="The port Kodi is listening on (default: 8080)" />
+ </div>
+   <div class="form-group">
+ <input type="text" name="server-username" data-toggle="tooltip" data-placement="top" class="form-control" id="server-username" placeholder="Username" data-title="The username configured for the Kodi Web Interface" />
+ </div>
+  <div class="form-group">
+ <input type="password" name="server-password" data-toggle="tooltip" data-placement="top" class="form-control" id="server-password" placeholder="Password" data-title="The password configured for the Kodi Web Interface" />
+ </div>
+ <div class="form-group">
+ <button type="button" class="btn btn-success adding" id="server-add">Add</button>
+ <button type="button" class="btn btn-success editing" id="server-edit">Edit</button>
+ </div>
+</form>
+</div>
+<!--
+<br /><br />
+<div id="optionsdiv">
+<h3>Plugin options</h3>
+<label><input type="checkbox" id="shownotify" /> Do not display notifications when sending an url to Kodi</label>
+</div>
+-->
+  </div>
+  <script src="jquery-2.1.1.min.js"></script>
+  <script src="tooltips.js"></script>
+  <script src="preferences.js"></script>
+  </body>
+</html>
