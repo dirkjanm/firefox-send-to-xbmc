@@ -122,7 +122,7 @@ function parseUrlPlay(url, pathname, playhost) {
 
 //Send a YouTube video
 function sendYouTube(ytid, playhost) {
-  var url = 'plugin://plugin.video.youtube/?action=play_video&videoid=' + ytid;
+  var url = 'plugin://plugin.video.youtube/play/?video_id=' + ytid;
   sendToKodi(url, playhost);
 }
 
