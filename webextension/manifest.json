@@ -1,14 +1,25 @@
 {
   "name": "Send to Kodi",
-  "version": "0.0.1",
+  "version": "3.0.0-beta1",
   "applications": {
   "gecko": {
       "id": "jid0-YCM0p5WlCGjvBJcZhAusQ5h26wM@jetpack"
     }
   },
   "manifest_version": 2,
-  "permissions": ["storage", "notifications"],
+  "permissions": [
+    "storage",
+    "notifications",
+    "menus",
+    "webRequest",
+    "<all_urls>"
+  ],
   "background": {
     "scripts": ["main.js"]
+  },
+  "options_ui": {
+    "page": "data/preferences.html",
+    "open_in_tab": true,
+    "browser_style": false
   }
 }
