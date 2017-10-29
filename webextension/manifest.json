@@ -1,6 +1,6 @@
 {
   "name": "Send to Kodi",
-  "version": "3.0.0-beta1",
+  "version": "3.0.0b1",
   "applications": {
   "gecko": {
       "id": "jid0-YCM0p5WlCGjvBJcZhAusQ5h26wM@jetpack"
