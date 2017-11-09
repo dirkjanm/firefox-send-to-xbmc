@@ -7,11 +7,15 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 function createMenus(){
   // Create main menu
+  if(typeof window.setupmenu != 'undefined'){
+    browser.menus.remove(window.setupmenu);
+    delete window.setupmenu;
+  }
   let srvget = browser.storage.local.get('servers');
   srvget.then(function(settings){
     let servers = settings['servers'];
     if(typeof servers == 'undefined' || servers.length == 0){
-      browser.menus.create({
+      window.setupmenu =  browser.menus.create({
         title: "Add a server for Send to Kodi",
         contexts: ['audio','video','link'],
         onclick: openSettings
