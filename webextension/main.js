@@ -194,5 +194,44 @@ function handleComplete(resp) {
   }
 }
 
+function setupButton(){
+  var gettingAllTabs = browser.tabs.query({url:'*://www.youtube.com/watch*'});
+  gettingAllTabs.then((tabs) => {
+    for (let tab of tabs) {
+      browser.pageAction.show(tab.id);
+    }
+  });
+  browser.tabs.onUpdated.addListener(displayButton);
+  browser.pageAction.onClicked.addListener(buttonClick);
+}
+
+function displayButton(tabId, changeInfo, tabInfo) {
+    var regExp = /^.*(youtube.com\/watch.*[\?\&]v=)([^#\&\?]*).*/;
+    if (tabInfo.url.match(regExp)) {
+      browser.pageAction.show(tabId);
+    }
+}
+
+function buttonClick(tab){
+  // If more than one server, show popup
+  if(window.sdata && window.sdata.size > 1) {
+    browser.pageAction.setPopup({tabId: tab.id, popup: "data/popup.html"});
+    browser.pageAction.openPopup();
+  } else {
+    // Else, get server data
+    let srvget = browser.storage.local.get('servers');
+    srvget.then(function(settings){
+      let servers = settings['servers'];
+      // No servers?
+      if(typeof servers == 'undefined' || servers.length == 0){
+        openSettings();
+      }else{
+        parseUrlPlay(tab.url, '', servers[0]);
+      }
+    });
+  }
+}
+
 // Main
 createMenus();
+setupButton();

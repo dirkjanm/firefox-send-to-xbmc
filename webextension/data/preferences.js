@@ -31,8 +31,12 @@ function updatePage() {
   });
   browser.storage.local.set({'servers':servers});
   var page = browser.extension.getBackgroundPage();
-  page.removeSendToServers(page.sdata);
-  page.sdata = page.addSendToServers(servers);
+  if (typeof page.sdata == 'undefined') {
+    page.createMenus();
+  } else {
+    page.removeSendToServers(page.sdata);
+    page.sdata = page.addSendToServers(servers);
+  }
   if ($('#serverlist tr').length === 0) {
     $('#noservers').removeClass('hidden');
   } else {
