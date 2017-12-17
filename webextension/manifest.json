@@ -15,6 +15,10 @@
     "tabs",
     "<all_urls>"
   ],
+  "icons": {
+    "48": "data/img/kodi_logo_only.svg",
+    "96": "data/img/kodi_logo_only.svg"
+  },
   "background": {
     "scripts": ["main.js"]
   },
