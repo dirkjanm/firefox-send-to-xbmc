@@ -7,39 +7,60 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 function createMenus(){
   // Create main menu
+  // Delete old menu's if they are there
   if(typeof window.setupmenu != 'undefined'){
     browser.menus.remove(window.setupmenu);
     delete window.setupmenu;
+  }
+  if(typeof window.separatormenu != 'undefined'){
+    browser.menus.remove(window.separatormenu);
+    delete window.separatormenu;
   }
   let srvget = browser.storage.local.get('servers');
   srvget.then(function(settings){
     let servers = settings['servers'];
     if(typeof servers == 'undefined' || servers.length == 0){
-      window.setupmenu =  browser.menus.create({
+      window.setupmenu = browser.menus.create({
         title: "Add a server for Send to Kodi",
         contexts: ['audio','video','link'],
         onclick: openSettings
       });
     }else{
-      browser.menus.create({
-        id: "stk-playon",
-        title: "Play on",
-        icons: {
-          "16": 'data/img/play.svg'
-        },
-        contexts: ['audio','video','link'],
-      });
-      // Add "Edit servers"
-      browser.menus.create({
-        contexts: ['audio','video','link'],
-        type: "separator"
-      });
-      browser.menus.create({
-        title: "Manage servers",
-        contexts: ['audio','video','link'],
-        onclick: openSettings
-      });
-      window.sdata = addSendToServers(servers);
+      if(servers.length > 1){
+        // We remove this useless submenu for now
+        // browser.menus.create({
+        //   id: "stk-playon",
+        //   title: "Play on",
+        //   icons: {
+        //     "16": 'data/img/play.svg'
+        //   },
+        //   contexts: ['audio','video','link'],
+        // });
+        window.sdata = addSendToServers(servers);
+        // Add "Edit servers"
+        window.separatormenu = browser.menus.create({
+          contexts: ['audio','video','link'],
+          type: "separator"
+        });
+        window.setupmenu = browser.menus.create({
+          title: "Manage servers",
+          contexts: ['audio','video','link'],
+          onclick: openSettings
+        });
+      }else{
+        var sdata = new Map();
+        sdata.set("1000", servers[0]);
+        browser.menus.create({
+          id: "1000",
+          title: "Send to Kodi",
+          icons: {
+            "16": 'data/img/play.svg'
+          },
+          onclick: handleSubMenuClick,
+          contexts: ['audio','video','link'],
+        });
+        window.sdata = sdata;
+      }
     }
   });
 }
@@ -51,7 +72,7 @@ function addSendToServers(servers){
     sdata.set(i.toString(),server);
     browser.menus.create({
       id: (i++).toString(),
-      parentId: "stk-playon",
+      // parentId: "stk-playon",
       title: server.label,
       onclick: handleSubMenuClick,
       contexts: ['audio','video','link'],
@@ -76,6 +97,7 @@ function removeSendToServers(sdata){
   sdata.forEach(function (server, menuid) {
     browser.menus.remove(menuid);
   });
+  browser.menus.remove('stk-playon');
 }
 
 // Open settings page

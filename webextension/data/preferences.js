@@ -32,10 +32,12 @@ function updatePage() {
   browser.storage.local.set({'servers':servers});
   var page = browser.extension.getBackgroundPage();
   if (typeof page.sdata == 'undefined') {
+    //Set up correct menus for the first time
     page.createMenus();
   } else {
+    //Set up menus again
     page.removeSendToServers(page.sdata);
-    page.sdata = page.addSendToServers(servers);
+    page.createMenus();
   }
   if ($('#serverlist tr').length === 0) {
     $('#noservers').removeClass('hidden');
