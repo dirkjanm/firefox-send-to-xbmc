@@ -98,16 +98,34 @@ function handleSubMenuClick(clickdata){
 
 //Parse an url to send
 function parseUrlPlay(url, pathname, playhost) {
-  var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
-  var match = url.match(regExp);
+  var youtubeRex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
+  var match = url.match(youtubeRex);
   if (match && match[2].length == 11) {
     sendYouTube(match[2], playhost);
     return;
   }
-  var regExp2 = /^.*(youtube.com\/watch.*[\?\&]v=)([^#\&\?]*).*/;
-  var match2 = url.match(regExp2);
+  var youtubeRex2 = /^.*(youtube.com\/watch.*[\?\&]v=)([^#\&\?]*).*/;
+  var match2 = url.match(youtubeRex2);
   if (match2 && match2[2].length == 11) {
     sendYouTube(match2[2], playhost);
+    return;
+  }
+  var vimeoRex = /^.*vimeo.com\/([0-9]+)/;
+  var match = url.match(vimeoRex);
+  if (match) {
+    sendToVimeo(match[1], playhost);
+    return;
+  }
+  var twitchChannelRex = /^.*twitch.tv\/([a-zA-Z0-9_]+)$/;
+  var match = url.match(twitchChannelRex);
+  if (match) {
+    sendToTwitch(match[1], 'channel', playhost);
+    return;
+  }
+  var twitchVideoRex = /^.*twitch.tv\/videos\/([0-9]+)$/;
+  var match = url.match(twitchVideoRex);
+  if (match) {
+    sendToTwitch(match[1], 'video', playhost);
     return;
   }
   if(pathname === ''){
@@ -127,6 +145,25 @@ function parseUrlPlay(url, pathname, playhost) {
 //Send a YouTube video
 function sendYouTube(ytid, playhost) {
   var url = 'plugin://plugin.video.youtube/play/?video_id=' + ytid;
+  sendToKodi(url, playhost);
+}
+
+//Send a Vimeo video
+function sendToVimeo(vmid, playhost) {
+  var url = 'plugin://plugin.video.vimeo/play/?video_id=' + vmid;
+  sendToKodi(url, playhost);
+}
+
+//Send a Twitch channel/video
+function sendToTwitch(twid, type, playhost) {
+  if (type == 'channel'){
+    // This works for Kodi Twitch plugin v2.1.0 or newer only
+    var url = 'plugin://plugin.video.twitch/?mode=play&channel_name=' + twid;
+  }
+  if (type == 'video'){
+    var url = 'plugin://plugin.video.twitch/?mode=play&video_id=' + twid;
+  }
+  console.log(url);
   sendToKodi(url, playhost);
 }
 
@@ -195,7 +232,7 @@ function handleComplete(resp) {
 }
 
 function setupButton(){
-  var gettingAllTabs = browser.tabs.query({url:'*://www.youtube.com/watch*'});
+  var gettingAllTabs = browser.tabs.query({url:['*://www.youtube.com/watch*','*://vimeo.com/*','*://twitch.tv/videos/*']});
   gettingAllTabs.then((tabs) => {
     for (let tab of tabs) {
       browser.pageAction.show(tab.id);
@@ -207,7 +244,10 @@ function setupButton(){
 
 function displayButton(tabId, changeInfo, tabInfo) {
     var regExp = /^.*(youtube.com\/watch.*[\?\&]v=)([^#\&\?]*).*/;
-    if (tabInfo.url.match(regExp)) {
+    var vimeoRex = /^.*vimeo.com\/([0-9]+)/;
+    var twitchVideoRex = /^.*twitch.tv\/videos\/([0-9]+)$/;
+
+    if (tabInfo.url.match(regExp) || tabInfo.url.match(vimeoRex) || tabInfo.url.match(twitchVideoRex)) {
       browser.pageAction.show(tabId);
     }
 }
