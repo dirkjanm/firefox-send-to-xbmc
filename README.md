@@ -3,10 +3,13 @@ https://addons.mozilla.org/en-US/firefox/addon/send-to-xbmc/
 
 ## About
 Sends YouTube videos, video and music links to Kodi for playback. Adds a right click menu for links pointing to YouTube and audio/video files for direct playback on your TV with Kodi.
-Works with XBMC Eden and later, as well as with Kodi Helix.
+Works with XBMC Eden and later, as well as with Kodi Helix and newer.
 
 Version 2.0 of the plugin was made open source and placed on GitHub.
 This version rewrote the whole server management part of the plugin, adding support for multiple servers and adding the basics for a lot of extra features
+
+Version 3.0 is a complete rewrite of the extension into a WebExtension, granting compatibility with Firefox 57.
+
 ## Setup XBMC/Kodi
 Under System -> Services: 
  * Web Server -> Make sure it's enabled and a password is set 
@@ -20,6 +23,8 @@ Plug your Kodi info into the FireFox addon... IP can be obtained from System -> 
 - Supported formats 
 
   * YouTube
+  * Twitch
+  * Vimeo
   * mp4
   * mkv
   * mov
@@ -46,17 +51,16 @@ Plug your Kodi info into the FireFox addon... IP can be obtained from System -> 
 * ~~Multiserver support~~ `[Added v2.0]`
 * Queue videos in playlist
 * Manage playlist
-* Maybe: Plugin button in Toolbar
+* ~~Plugin button in Toolbar~~ `[Added v3.0]`
 * Maybe: Some simple remote control functions
 
 ## Building
 
-Make sure you have the Add-on SDK [installed](https://developer.mozilla.org/en-US/Add-ons/SDK/Tutorials/Installation) and that you have `cfx` activated.
+Make sure you have the web-ext tool [installed](https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Getting_started_with_web-ext).
 
-Run the plugin with `cfx run`
-Create an xpi that you can drag and drop to your browser with `cfx xpi`
-
-To add the "Options" button in the Add-ons Manager, replace the `install.rdf` file in the xpi file with the `install.rdf` file from the repository using an archive manager such as 7-zip.
+Run the plugin with `web-ext run`
+Build the plugin with `web-ext build`
+Alternatively, in `about:debugging` you can install the extension as temporary extension by loading the `manifest.json` from the webextension directory.
 
 ## License
 

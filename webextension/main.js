@@ -185,7 +185,6 @@ function sendToTwitch(twid, type, playhost) {
   if (type == 'video'){
     var url = 'plugin://plugin.video.twitch/?mode=play&video_id=' + twid;
   }
-  console.log(url);
   sendToKodi(url, playhost);
 }
 
