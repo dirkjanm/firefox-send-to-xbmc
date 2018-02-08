@@ -26,10 +26,10 @@ Plug your Kodi info into the FireFox addon... IP can be obtained from System -> 
    (at bottom left, in **Show settings**) mark **All** and in:
    **Interface > Main interfaces > Lua > Password**
    enter the same password as defined in this addon.
-   That's it! It's ready to rock!
+   **That's it! It's ready to rock!**
 
-      That is - if VLC's Web interface started: You can verify by going to http://[VLC_IP_adress]:8080/ in your browser.
-       If not - try restarting VLC and enable Web again.
+    _That is - if VLC's Web interface started: You can verify by going to http://[VLC_IP_adress]:8080/ in your browser. 
+       If not - try restarting VLC and enable Web again._
    
  * To permanantly enable VLC Web Interface for every run, mark **Web** in
    **Interface > Main interfaces**
