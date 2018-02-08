@@ -3,7 +3,7 @@
 https://addons.mozilla.org/en-US/firefox/addon/send-to-xbmc/
 
 ## About
-Sends YouTube videos, video and music links to Kodi for playback. Adds a right click menu for links pointing to YouTube and audio/video files for direct playback on your TV with Kodi or VLC.
+Sends YouTube videos, video and music links to Kodi or VLC for playback. Adds a right click menu for links pointing to YouTube and audio/video files for direct playback on your TV with Kodi or VLC.
 Works with XBMC Eden and later, as well as with Kodi Helix and newer and VLC.
 
 Version 2.0 of the plugin was made open source and placed on GitHub.
