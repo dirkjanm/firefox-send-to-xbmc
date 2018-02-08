@@ -22,8 +22,8 @@
     <em:hasEmbeddedWebExtension>true</em:hasEmbeddedWebExtension>
 
     <!-- Front End MetaData -->
-    <em:name>Send to Kodi</em:name>
-    <em:description>Sends YouTube, video and music links to Kodi for playback</em:description>
+    <em:name>Send to Player</em:name>
+    <em:description>Sends YouTube, video and music links to Kodi or VLC for playback</em:description>
     <em:creator>Sano_Webdevelopment</em:creator>
 
 

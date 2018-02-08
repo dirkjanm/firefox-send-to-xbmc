@@ -1,9 +1,9 @@
-# Send to XBMC/Kodi Firefox plugin
+# Based on Send to XBMC/Kodi Firefox plugin
 https://addons.mozilla.org/en-US/firefox/addon/send-to-xbmc/
 
 ## About
-Sends YouTube videos, video and music links to Kodi for playback. Adds a right click menu for links pointing to YouTube and audio/video files for direct playback on your TV with Kodi.
-Works with XBMC Eden and later, as well as with Kodi Helix and newer.
+Sends YouTube videos, video and music links to Kodi for playback. Adds a right click menu for links pointing to YouTube and audio/video files for direct playback on your TV with Kodi or VLC.
+Works with XBMC Eden and later, as well as with Kodi Helix and newer and VLC.
 
 Version 2.0 of the plugin was made open source and placed on GitHub.
 This version rewrote the whole server management part of the plugin, adding support for multiple servers and adding the basics for a lot of extra features
@@ -17,6 +17,23 @@ Under System -> Services:
 Go back to Home to save changes
 
 Plug your Kodi info into the FireFox addon... IP can be obtained from System -> System info (Appears when System is highlighted )
+
+## Setup VLC
+ * This addon requires running instance of VLC with enabled Web interface to controll it.
+   (To enable once-per run in VLC: Menu **View > Add Interface > Web)**
+ * VLC Web Interface requires (at minimum) to set password to run:
+   **Tools > Preferences:**
+   (at bottom left, in **Show settings**) mark **All** and in:
+   **Interface > Main interfaces > Lua > Password**
+   enter the same password as defined in this addon.
+   That's it! It's ready to rock!
+
+      That is - if VLC's Web interface started: You can verify by going to http://[VLC_IP_adress]:8080/ in your browser.
+       If not - try restarting VLC and enable Web again.
+   
+ * To permanantly enable VLC Web Interface for every run, mark **Web** in
+   **Interface > Main interfaces**
+
 
 ## Features
 
@@ -46,6 +63,8 @@ Plug your Kodi info into the FireFox addon... IP can be obtained from System -> 
   * tiff
 
 - Supports multiple servers
+
+- Everything VLC supports (URL is sent without parsing)
 
 ## Planned features
 * ~~Multiserver support~~ `[Added v2.0]`
