@@ -9,7 +9,8 @@ function updateServersTable(servers) {
       .append($('<td>').text(server.host))
       .append($('<td>').text(server.port))
       .append($('<td>').text(server.username))
-      .append($('<td>', { "data-password": server.password }).text('[hidden]'));
+      .append($('<td>', { "data-password": server.password }).text('[hidden]'))
+      .append($('<td>').text(server.type));
     var link = $('<a>',{"href": '#addserver', "class": 'btn btn-default editbtn btn-sm'}).text('Edit');
     var deletebtn = $('<button>',{"class": 'btn btn-danger btn-sm deleterow', "type":'button'}).text('Delete');
     row.append($('<td>').append(link,' ',deletebtn));
@@ -27,6 +28,7 @@ function updatePage() {
     server.port = $(ritems[2]).text();
     server.username = $(ritems[3]).text();
     server.password = $(ritems[4]).data('password');
+    server.type = $(ritems[5]).text();
     servers.push(server);
   });
   browser.storage.local.set({'servers':servers});
@@ -92,6 +94,9 @@ function main(){
       if (i === 4) {
         $('#server-password').val(el.data('password'));
       }
+      if (i === 5) {
+        $('#server-type').val(el.text());
+      }
     });
     $('#formmode').removeClass('addmode').addClass('editmode');
   });
@@ -108,7 +113,8 @@ function main(){
       .append($('<td>').text($('#server-ip').val()))
       .append($('<td>').text($('#server-port').val()))
       .append($('<td>').text($('#server-username').val()))
-      .append($('<td>', { "data-password": $('#server-password').val() }).text('[hidden]'));
+      .append($('<td>', { "data-password": $('#server-password').val() }).text('[hidden]'))
+      .append($('<td>').text($('#server-type').val() ))
     var link = $('<a>',{"href": '#addserver', "class": 'btn btn-default editbtn btn-sm'}).text('Edit');
     var deletebtn = $('<button>',{"class": 'btn btn-danger btn-sm deleterow', "type":'button'}).text('Delete');
     row.append($('<td>').append(link,' ',deletebtn));
@@ -133,7 +139,10 @@ function main(){
       .append($('<td>').text($('#server-ip').val()))
       .append($('<td>').text($('#server-port').val()))
       .append($('<td>').text($('#server-username').val()))
-      .append($('<td>', { "data-password": $('#server-password').val() }).text('[hidden]'));
+      .append($('<td>', { "data-password": $('#server-password').val() }).text('[hidden]'))
+      .append($('<td>').text($('#server-type').val() ));
+    
+    $('#debugdiv').append('server-type: ' + $('#server-type').val())
     var link = $('<a>',{"href": '#addserver', "class": 'btn btn-default editbtn btn-sm'}).text('Edit');
     var deletebtn = $('<button>',{"class": 'btn btn-danger btn-sm deleterow', "type":'button'}).text('Delete');
     row.append($('<td>').append(link,' ',deletebtn));
