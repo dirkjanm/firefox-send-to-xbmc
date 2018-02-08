@@ -1,4 +1,5 @@
-# Based on Send to XBMC/Kodi Firefox plugin
+# Send to Player Firefox plugin (using Web API)
+## Based on Send to XBMC/Kodi Firefox plugin
 https://addons.mozilla.org/en-US/firefox/addon/send-to-xbmc/
 
 ## About
