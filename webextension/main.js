@@ -21,7 +21,7 @@ function createMenus(){
     let servers = settings['servers'];
     if(typeof servers == 'undefined' || servers.length == 0){
       window.setupmenu = browser.menus.create({
-        title: "Add a server for Send to Kodi",
+        title: "Add a server for Send to Player",
         contexts: ['audio','video','link'],
         onclick: openSettings
       });
@@ -52,7 +52,7 @@ function createMenus(){
         sdata.set("1000", servers[0]);
         browser.menus.create({
           id: "1000",
-          title: "Send to Kodi",
+          title: "Send to Player",
           icons: {
             "16": 'data/img/play.svg'
           },
@@ -88,7 +88,7 @@ function displayMessage(m_title, message, type) {
   browser.notifications.create({
     type: 'basic',
     message: message,
-    title: 'Send to Kodi - ' + m_title
+    title: 'Send to Player - ' + m_title
   });
 }
 
@@ -120,6 +120,12 @@ function handleSubMenuClick(clickdata){
 
 //Parse an url to send
 function parseUrlPlay(url, pathname, playhost) {
+  
+  if(playhost.type == 'VLC') {
+    sendToVLC(url, playhost);
+    return;
+  }
+  
   var youtubeRex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
   var match = url.match(youtubeRex);
   if (match && match[2].length == 11) {
@@ -248,6 +254,62 @@ function handleComplete(resp) {
       displayMessage('Network error', 'Could not contact Kodi. Check your configuration.', 'error');
     } else {
       displayMessage('Status error ' + resp.status, 'Could not contact Kodi. Check your configuration. HTTP Status: ' + resp.status + ' ' + resp.statusText + '', 'error');
+    }
+  }
+}
+
+//Send request to VLC
+function sendToVLC(fileurl, server) {
+  // Construct headers
+  serverurl = server.host +':'+server.port;
+  postheaders = new Headers()
+  postheaders.append('Content-Type','application/mp4');
+  rurl = 'http://' + serverurl + '/requests/';
+  if (server.password && server.password !== '') {
+    adata = btoa(server.username + ':' + server.password);
+    postheaders.append('Authorization','Basic '+ adata);
+  }
+
+  displayMessage('Sending', 'Sending to VLC...', 'info');
+  rdata = {
+    method: 'GET',
+    headers: postheaders,
+    credentials: 'include'
+  }
+  fetch(rurl+'status.xml?command=in_play&input='+escape(fileurl), rdata)
+    .then(handleCompleteVLC);
+}
+
+//Handle return from VLC
+function handleCompleteVLC(resp) {
+  if (resp.status == 200) {
+  resp.text()
+  //.then(str => (new DOMParser()).parseFromString(str, "text/xml")) //ugly xml parsing (not needed)
+  .then(function(data){
+      if (data && resp.ok) {
+        if (resp.statusText == 'OK') {
+          displayMessage('Success', 'Sent to VLC', 'ok');
+          return;
+        }
+      }
+      if (typeof data.error !== 'undefined') {
+        if (typeof data.error.data !== 'undefined' && data.error.data.stack.message) {
+          displayMessage('VLC Error ' + data.error.code, 'VLC reported: ' + data.error.data.stack.message + '', 'error');
+          return;
+        }
+        if (typeof data.error.message !== 'undefined') {
+          displayMessage('VLC Error ' + data.error.code, 'VLC reported: ' + data.error.message + '', 'error');
+          return;
+        }
+        displayMessage('VLC Error ', 'VLC reported error code ' + data.error.code + '', 'error');
+        return;
+      }
+    });
+  } else {
+    if (resp.status === 0) {
+      displayMessage('Network error', 'Could not contact Kodi. Check your configuration.', 'error');
+    } else {
+      displayMessage('Status error ' + resp.status, 'Could not contact VLC. Check your configuration. HTTP Status: ' + resp.status + ' ' + resp.statusText + '', 'error');
     }
   }
 }

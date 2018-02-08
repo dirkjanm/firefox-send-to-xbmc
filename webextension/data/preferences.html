@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Send to Kodi preferences</title>
+    <title>Send to Player preferences</title>
 
     <!-- Bootstrap -->
     <link href="bootstrap.min.css" rel="stylesheet">
@@ -12,13 +12,13 @@
   <body role="document">
   <div class="container theme-showcase" role="main">
   <div class="page-header">
-    <h1>Send to XBMC/Kodi preferences</h1>
+    <h1>Send to Player preferences</h1>
     </div>
 <h2>Servers</h2>
 <p id="noservers" class="alert alert-info hidden">No servers defined, you can add your first one below</p>
 <table class="table table-striped">
 <thead>
-<tr><th>Name</th><th>Kodi IP</th><th>Kodi port</th><th>Username</th><th>Password</th><th>Edit/Remove</th></tr>
+<tr><th>Name</th><th>Player IP</th><th>Player port</th><th>Username</th><th>Password</th><th>PlayerType</th><th>Edit/Remove</th></tr>
 </thead>
 <tbody id="serverlist">
 </tbody>
@@ -29,19 +29,25 @@
 <h2 class="editing">Edit server</h2>
 <form id="addserver" class="form-inline" role="form">
  <div class="form-group">
- <input type="text" name="server-label" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-label" placeholder="Server name" data-title="The name you want this Kodi server to have" />
+ <input type="text" name="server-label" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-label" placeholder="Server name" data-title="The name you want this Player server to have" />
  </div>
   <div class="form-group">
- <input type="text" name="server-ip" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-ip" placeholder="Server IP/host" data-title="The IP address or hostname of the device Kodi runs on" />
+ <input type="text" name="server-ip" required data-toggle="tooltip" data-placement="top" class="form-control" id="server-ip" placeholder="Server IP/host" data-title="The IP address or hostname of the device Players runs on" />
  </div>
   <div class="form-group">
- <input type="text" name="server-port" data-toggle="tooltip" data-placement="top" class="form-control" id="server-port" placeholder="Port" data-title="The port Kodi is listening on (default: 8080)" />
+ <input type="text" name="server-port" data-toggle="tooltip" data-placement="top" class="form-control" id="server-port" placeholder="Port" data-title="The port Player is listening on (default: 8080)" size=6/>
  </div>
    <div class="form-group">
- <input type="text" name="server-username" data-toggle="tooltip" data-placement="top" class="form-control" id="server-username" placeholder="Username" data-title="The username configured for the Kodi Web Interface" />
+ <input type="text" name="server-username" data-toggle="tooltip" data-placement="top" class="form-control" id="server-username" placeholder="Username" data-title="The username configured for the Player Web Interface" />
  </div>
   <div class="form-group">
- <input type="password" name="server-password" data-toggle="tooltip" data-placement="top" class="form-control" id="server-password" placeholder="Password" data-title="The password configured for the Kodi Web Interface" />
+ <input type="password" name="server-password" data-toggle="tooltip" data-placement="top" class="form-control" id="server-password" placeholder="Password" data-title="The password configured for the Playe Web Interface" />
+ </div>
+ <div class="form-group">
+  <select name="server-type" data-toggle="tooltip" data-placement="top" class="form-control" id="server-type" default="Kodi" data-title="Player Type" >
+   <option value="Kodi">Kodi</option>
+   <option value="VLC">VLC</option>
+  </select>
  </div>
  <div class="form-group">
  <button type="button" class="btn btn-success adding" id="server-add">Add</button>
@@ -56,6 +62,25 @@
 <label><input type="checkbox" id="shownotify" /> Do not display notifications when sending an url to Kodi</label>
 </div>
 -->
+  </div>
+  
+  <div id="VLC info">
+  <p>
+   <h3>VLC information</h3>
+   This addon requires running instance of VLC with enabled Web interface to controll it. <br>
+   (To enable once-per run in VLC: Menu <b>View > Add Interface > Web)</b> <br>   
+   VLC Web Interface requires (at minimum) to set password to run:<br>
+   <b>Tools > Preferences:</b> <br>
+   (at bottom left, in <b>Show settings</b>) mark <b>All</b> and in: <br>
+   <b>Interface > Main interfaces > Lua > Password</b> <br>
+   enter the same password as defined in this addon. <br>
+   <i>That's it! It's ready to rock!</i> <br>
+   <small>That is - if VLC's Web interface started: You can verify by going to http://[VLC_IP_adress]:8080/ in your browser. <br>
+   If not - try restarting VLC and enable Web again.
+   </small>
+   To permanantly enable VLC Web Interface for every run, mark <b>Web</b> in <br>
+   <b>Interface > Main interfaces</b> <br>
+   </p>
   </div>
   <script src="jquery-3.2.1.min.js"></script>
   <script src="tooltips.js"></script>

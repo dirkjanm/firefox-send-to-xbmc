@@ -1,6 +1,6 @@
 {
-  "name": "Send to Kodi",
-  "version": "3.1.0",
+  "name": "Send to Player",
+  "version": "3.1.1",
   "applications": {
   "gecko": {
       "id": "jid0-YCM0p5WlCGjvBJcZhAusQ5h26wM@jetpack"
@@ -30,6 +30,6 @@
   "page_action": {
     "browser_style": true,
     "default_icon": "data/img/kodi_logo_only.svg",
-    "default_title": "Send to Kodi"
+    "default_title": "Send to Player"
   }
 }
