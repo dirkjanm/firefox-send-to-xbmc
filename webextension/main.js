@@ -253,7 +253,7 @@ function handleComplete(resp) {
 }
 
 function setupButton(){
-  var gettingAllTabs = browser.tabs.query({url:['*://www.youtube.com/watch*','*://vimeo.com/*','*://twitch.tv/videos/*']});
+  var gettingAllTabs = browser.tabs.query({url:['*://www.youtube.com/watch*','*://vimeo.com/*','*://twitch.tv/*']});
   gettingAllTabs.then((tabs) => {
     for (let tab of tabs) {
       browser.pageAction.show(tab.id);
@@ -267,8 +267,9 @@ function displayButton(tabId, changeInfo, tabInfo) {
     var regExp = /^.*(youtube.com\/watch.*[\?\&]v=)([^#\&\?]*).*/;
     var vimeoRex = /^.*vimeo.com\/([0-9]+)/;
     var twitchVideoRex = /^.*twitch.tv\/videos\/([0-9]+)$/;
+    var twitchLiveRex = /^.*twitch.tv\/([a-zA-Z0-9_]+)$/;
 
-    if (tabInfo.url.match(regExp) || tabInfo.url.match(vimeoRex) || tabInfo.url.match(twitchVideoRex)) {
+    if (tabInfo.url.match(regExp) || tabInfo.url.match(vimeoRex) || tabInfo.url.match(twitchVideoRex) || tabInfo.url.match(twitchLiveRex)) {
       browser.pageAction.show(tabId);
     }
 }
