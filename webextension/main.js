@@ -269,8 +269,14 @@ function displayButton(tabId, changeInfo, tabInfo) {
     var twitchVideoRex = /^.*twitch.tv\/videos\/([0-9]+)$/;
     var twitchLiveRex = /^.*twitch.tv\/([a-zA-Z0-9_]+)$/;
 
-    if (tabInfo.url.match(regExp) || tabInfo.url.match(vimeoRex) || tabInfo.url.match(twitchVideoRex) || tabInfo.url.match(twitchLiveRex)) {
+    if (tabInfo.url.match(regExp) || tabInfo.url.match(vimeoRex) || tabInfo.url.match(twitchVideoRex)) {
       browser.pageAction.show(tabId);
+    }
+    if (tabInfo.url.match(twitchLiveRex)) {
+      var notTwitchChannel = /twitch.tv\/(friends|inventory|subscriptions|payments)/;
+      if (! (tabInfo.url.match(notTwitchChannel))) {
+        browser.pageAction.show(tabId);
+      }
     }
 }
 
