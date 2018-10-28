@@ -138,7 +138,7 @@ function parseUrlPlay(url, pathname, playhost) {
     sendToVimeo(match[1], playhost);
     return;
   }
-  var bbcRex = /^.*bbc.co.uk\/iplayer\/[a-zA-Z0-9]{8}\/[A-Za-z0-9-]{10,}/;
+  var bbcRex = /^.*\.bbc\.co\.uk\/iplayer\/episode\/[a-zA-Z0-9]{8}\/[A-Za-z0-9-]{10,}/;
   var match = url.match(bbcRex);
   if (match) {
     sendToBBC(url, playhost);
@@ -184,7 +184,7 @@ function sendToVimeo(vmid, playhost) {
 
 //Send a BBC video
 function sendToBBC(url, playhost) {
-  var url = 'plugin://plugin.video.iplayerwww/?mode=202&url=' + encodeURI(url);
+  var url = 'plugin://plugin.video.iplayerwww/?mode=202&url=' + url;
   sendToKodi(url, playhost);
 }
 
