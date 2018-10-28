@@ -138,6 +138,12 @@ function parseUrlPlay(url, pathname, playhost) {
     sendToVimeo(match[1], playhost);
     return;
   }
+  var bbcRex = /^.*\.bbc\.co\.uk\/iplayer\/episode\/[a-zA-Z0-9]{8}\/[A-Za-z0-9-]{10,}/;
+  var match = url.match(bbcRex);
+  if (match) {
+    sendToBBC(url, playhost);
+    return;
+  }
   var twitchChannelRex = /^.*twitch.tv\/([a-zA-Z0-9_]+)$/;
   var match = url.match(twitchChannelRex);
   if (match) {
@@ -173,6 +179,12 @@ function sendYouTube(ytid, playhost) {
 //Send a Vimeo video
 function sendToVimeo(vmid, playhost) {
   var url = 'plugin://plugin.video.vimeo/play/?video_id=' + vmid;
+  sendToKodi(url, playhost);
+}
+
+//Send a BBC video
+function sendToBBC(url, playhost) {
+  var url = 'plugin://plugin.video.iplayerwww/?mode=202&url=' + url;
   sendToKodi(url, playhost);
 }
 
@@ -253,7 +265,7 @@ function handleComplete(resp) {
 }
 
 function setupButton(){
-  var gettingAllTabs = browser.tabs.query({url:['*://www.youtube.com/watch*','*://vimeo.com/*','*://twitch.tv/videos/*']});
+  var gettingAllTabs = browser.tabs.query({url:['*://www.youtube.com/watch*','*://vimeo.com/*','*://twitch.tv/videos/*','*://www.bbc.co.uk/iplayer/episode/*/*']});
   gettingAllTabs.then((tabs) => {
     for (let tab of tabs) {
       browser.pageAction.show(tab.id);
