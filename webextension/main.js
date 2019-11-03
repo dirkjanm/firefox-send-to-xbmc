@@ -132,6 +132,12 @@ function parseUrlPlay(url, pathname, playhost) {
     sendYouTube(match2[2], playhost);
     return;
   }
+  var invidiousRex = /^.*(invidio.us\/watch.*[\?\&]v=)([^#\&\?]*).*/;
+  var match2 = url.match(invidiousRex);
+  if (match2 && match2[2].length == 11) {
+    sendYouTube(match2[2], playhost);
+    return;
+  }
   var vimeoRex = /^.*vimeo.com\/([0-9]+)/;
   var match = url.match(vimeoRex);
   if (match) {
@@ -253,7 +259,14 @@ function handleComplete(resp) {
 }
 
 function setupButton(){
-  var gettingAllTabs = browser.tabs.query({url:['*://www.youtube.com/watch*','*://vimeo.com/*','*://twitch.tv/videos/*']});
+  var gettingAllTabs = browser.tabs.query({
+    url: [
+      '*://www.invidio.us/watch*',
+      '*://www.youtube.com/watch*',
+      '*://vimeo.com/*',
+      '*://twitch.tv/videos/*'
+    ]
+  });
   gettingAllTabs.then((tabs) => {
     for (let tab of tabs) {
       browser.pageAction.show(tab.id);
@@ -265,10 +278,15 @@ function setupButton(){
 
 function displayButton(tabId, changeInfo, tabInfo) {
     var regExp = /^.*(youtube.com\/watch.*[\?\&]v=)([^#\&\?]*).*/;
+    var invidiousRex = /^.*(invidio.us\/watch.*[\?\&]v=)([^#\&\?]*).*/;
     var vimeoRex = /^.*vimeo.com\/([0-9]+)/;
     var twitchVideoRex = /^.*twitch.tv\/videos\/([0-9]+)$/;
 
-    if (tabInfo.url.match(regExp) || tabInfo.url.match(vimeoRex) || tabInfo.url.match(twitchVideoRex)) {
+  if (
+    tabInfo.url.match(regExp) ||
+    tabInfo.url.match(invidiousRex) ||
+    tabInfo.url.match(vimeoRex) ||
+    tabInfo.url.match(twitchVideoRex)) {
       browser.pageAction.show(tabId);
     }
 }
