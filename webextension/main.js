@@ -150,6 +150,12 @@ function parseUrlPlay(url, pathname, playhost) {
     sendToTwitch(match[1], 'video', playhost);
     return;
   }
+  var soundcloudRex = /^.*(soundcloud.com\/).*$/;
+  var match = url.match(soundcloudRex);
+  if (match) {
+    sendSoundcloud(match[0], playhost);
+    return;
+  }
   if(pathname === ''){
     //Dont extra check the extension
     sendToKodi(url,playhost);
@@ -187,6 +193,12 @@ function sendToTwitch(twid, type, playhost) {
   }
   sendToKodi(url, playhost);
 }
+
+function sendSoundcloud(surl, playhost) {
+  var url = 'plugin://plugin.audio.soundcloud/play/?url=' + surl;
+  sendToKodi(url, playhost);
+}
+
 
 //Send request to Kodi
 function sendToKodi(fileurl, server) {
