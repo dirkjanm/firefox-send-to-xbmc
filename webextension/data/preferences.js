@@ -52,10 +52,14 @@ function validateForm() {
     return false;
   }
   var ipregex = /^([0-2]?\d{0,2}\.){3}([0-2]?\d{0,2})$/;
+  var ipv6regex = /^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$/;
   var hostregex = /^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9]))*$/;
-  if ($('#server-ip').val() === '' || (!ipregex.test($('#server-ip').val()) && !hostregex.test($('#server-ip').val()))) {
+  if ($('#server-ip').val() === '' || (!ipregex.test($('#server-ip').val()) && !ipv6regex.test($('#server-ip').val()) && !hostregex.test($('#server-ip').val()))) {
     $('#server-ip').parent().addClass('has-error');
     return false;
+  }
+  if (ipv6regex.test($('#server-ip').val())) {
+    $('#server-ip').val('[' + $('#server-ip').val() + ']');
   }
   if ($('#server-port').val() === '') {
     $('#server-port').val('8080');
